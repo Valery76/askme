@@ -1,0 +1,23 @@
+<div class="user-questions-statistics">
+  <% I18n.locale = :ru %>
+  <p>
+    Всего <%= user_statistics[:number_of_questions] %>
+    <%= t :question,
+      count: user_statistics[:number_of_questions] %>
+  </p>
+  <p>
+    <%= user_statistics[:number_of_answered_questions] %>
+    <%= t :answered,
+      count: user_statistics[:number_of_answered_questions] %>
+    <%= t :question,
+      count: user_statistics[:number_of_answered_questions] %>
+  </p>
+  <p>
+    <%= user_statistics[:number_of_questions_to_answer] %>
+    не
+    <%= t :answered,
+      count: user_statistics[:number_of_questions_to_answer] %>
+    <%= t :question,
+      count: user_statistics[:number_of_questions_to_answer] %>
+  </p>
+</div>
