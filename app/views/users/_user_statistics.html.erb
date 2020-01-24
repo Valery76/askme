@@ -1,22 +1,32 @@
-<div class="user-questions-statistics">
-  <p>
-    Всего <%= user_statistics[:number_of_questions] %>
-    <%= t(:question,
-      count: user_statistics[:number_of_questions]) %>
-  </p>
-  <p>
-    <%= user_statistics[:number_of_answered_questions] %>
-    <%= t(:answered,
-      count: user_statistics[:number_of_answered_questions]) %>
-    <%= t(:question,
-      count: user_statistics[:number_of_answered_questions]) %>
-  </p>
-  <p>
-    <%= user_statistics[:number_of_questions_to_answer] %>
-    не
-    <%= t(:answered,
-      count: user_statistics[:number_of_questions_to_answer]) %>
-    <%= t(:question,
-      count: user_statistics[:number_of_questions_to_answer]) %>
-  </p>
+<div class="user-statistics container text-center">
+  <div class="column-1-3">
+    <p>Всего</p>
+    <h1 class="title-small">
+      <%= user_statistics[:number_of_questions] %>
+    </h1>
+    <p><%= t(:question, count: user_statistics[:number_of_questions]) %></p>
+  </div>
+  <div class="column-1-3">
+    <h1 class="title-small">
+      <%= user_statistics[:number_of_answered_questions] %>
+    </h1>
+    <p>
+      <%= t(:answered,
+        count: user_statistics[:number_of_answered_questions]) %>
+      <%= t(:question,
+        count: user_statistics[:number_of_answered_questions]) %>
+    </p>
+  </div>
+  <div class="column-1-3">
+    <h1 class="title-small">
+      <%= user_statistics[:number_of_questions_to_answer] %>
+    </h1>
+    <p>
+      не
+      <%= t(:answered,
+        count: user_statistics[:number_of_questions_to_answer]) %>
+      <%= t(:question,
+        count: user_statistics[:number_of_questions_to_answer]) %>
+    </p>
+  </div>
 </div>
