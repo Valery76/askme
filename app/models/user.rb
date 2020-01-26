@@ -52,6 +52,8 @@ class User < ApplicationRecord
   # Проверка формата юзернейма пользователя (только латинские буквы, цифры, и знак _)
   validates :username, format: { with: /\A[0-9a-zA-Z_]+\z/ }
 
+  validates :background_color, format: { with: /\A#\h{6}\z/ }, on: :update
+
   # Поле password нужно только при создании (create) нового юзера — регистрации.
   # При аутентификации (логине) мы будем сравнивать уже зашифрованные поля.
   validates :password, presence: true, on: :create
@@ -60,6 +62,8 @@ class User < ApplicationRecord
   # password_confirmation. Понадобится при создании формы регистрации, чтобы
   # снизить число ошибочно введенных паролей.
   validates_confirmation_of :password
+
+  after_validation :set_color, on: :update
 
   # Перед сохранением объекта в базу, создаем зашифрованный пароль, который
   # будет хранится в БД.
@@ -121,5 +125,11 @@ class User < ApplicationRecord
 
   def username_to_downcase
     self.username = username.downcase
+  end
+
+  def set_color
+    self.color = background_color.gsub(/\h{2}/) do |hex|
+      (255 - hex.to_i(16)).to_s(16).rjust(2, '0')
+    end
   end
 end

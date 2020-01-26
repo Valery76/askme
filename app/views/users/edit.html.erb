@@ -52,6 +52,12 @@
         <%= f.password_field :password_confirmation, class: 'form-text-field' %>
       </div>
 
+      <div class="form-field">
+        <%= f.label :background_color, class: 'form-label' %>
+        <%= f.color_field :background_color,
+          value: @user.background_color || '#005a55' %>
+      </div>
+
       <div class="form-action buffer-top">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>

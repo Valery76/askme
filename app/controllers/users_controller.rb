@@ -60,9 +60,9 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # Действие update будет отзываться при PUT-запросе из формы редактирования
-  # пользователя, которая находится по адресу /users/:id, например,
-  # /users/1
+  # Действие update будет отзываться при PUT-запросе на адрес /users/:id
+  # (например, /users/1) из формы редактирования пользователя, которая находится
+  # по адресу /users/:id/edit, например, /users/1/edit
   #
   # Перед этим действием сработает before_action :load_user и в переменной @user
   # у нас будет лежать пользовать с нужным id равным params[:id].
@@ -114,6 +114,6 @@ class UsersController < ApplicationController
   # :avatar_url. Другие ключи будут отброшены.
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-                                 :name, :username, :avatar_url)
+                                 :name, :username, :avatar_url, :background_color, :color)
   end
 end
