@@ -52,7 +52,8 @@ class User < ApplicationRecord
   # Проверка формата юзернейма пользователя (только латинские буквы, цифры, и знак _)
   validates :username, format: { with: /\A[0-9a-zA-Z_]+\z/ }
 
-  validates :background_color, format: { with: /\A#\h{6}\z/ }, on: :update
+  # validates :background_color, format: { with: /\A#\h{6}\z/ }, on: :update
+  validates :background_color, format: { with: /\A#\h{6}\z/ }, allow_blank: true
 
   # Поле password нужно только при создании (create) нового юзера — регистрации.
   # При аутентификации (логине) мы будем сравнивать уже зашифрованные поля.
@@ -63,7 +64,7 @@ class User < ApplicationRecord
   # снизить число ошибочно введенных паролей.
   validates_confirmation_of :password
 
-  after_validation :set_color, on: :update
+  after_validation :set_color
 
   # Перед сохранением объекта в базу, создаем зашифрованный пароль, который
   # будет хранится в БД.
@@ -128,8 +129,11 @@ class User < ApplicationRecord
   end
 
   def set_color
-    self.color = background_color.gsub(/\h{2}/) do |hex|
-      (255 - hex.to_i(16)).to_s(16).rjust(2, '0')
+    bc = background_color
+
+    if bc.present?
+      self.color =
+        bc.gsub(/\h{2}/) { |hex| (255 - hex.to_i(16)).to_s(16).rjust(2, '0') }
     end
   end
 end
