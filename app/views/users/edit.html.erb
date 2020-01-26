@@ -62,8 +62,9 @@
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>
     <% end %>
+  </div>
 
-    <%# Подробнее про помощники для создания форм: %>
-    <%# http://guides.rubyonrails.org/form_helpers.html %>
+  <div class="column-1-2 user-preview">
+    <%= render partial: 'user', object: @user %>
   </div>
 </div>

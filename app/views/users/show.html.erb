@@ -1,32 +1,7 @@
 <%# В шаблоне show мы пишем html-код для вывода внутреннго содержимого %>
 <%# страницы пользователя, которая будет показана по адресу /users/1 %>
 
-<%# Блок с информацией о пользователей %>
-<div class="user-header text-center"
-  style="background: <%= @user.background_color %>; color: <%= @user.color %>;">
-  <h1 class="title-medium">
-    <%# Выводим имя пользователя %>
-    <%= @user.name %>
-  </h1>
-
-   <div class="buffer-both">
-    <% if current_user == @user %>
-      <%= link_to 'Редактировать профиль', edit_user_path(@user),
-        style: "color: #{@user.color};" %>
-    <% end %>
-  </div>
-
-  <div class="user-image-div">
-    <%# Рисуем аватарку пользователя. Мы используем хелперы image_tag, %>
-    <%# встроенный в rails, и наш user_avatar %>
-    <%= image_tag user_avatar(@user), class: 'user-image', alt: '[Avatar]' %>
-  </div>
-
-  <h2 class="title-small buffer-both">
-    <%# Выводим никнейм пользователя с символом «@» перед ним. %>
-    @<%= @user.username %>
-  </h2>
-</div>
+<%= render partial: 'user', object: @user %>
 
 <div class="user-details">
   <div class="user-ask-button container text-center">
