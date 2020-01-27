@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_01_25_081421) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "background_color"
+    t.string "background_color", default: "#005a55"
     t.string "color"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

@@ -129,11 +129,8 @@ class User < ApplicationRecord
   end
 
   def set_color
-    bc = background_color
-
-    if bc.present?
-      self.color =
-        bc.gsub(/\h{2}/) { |hex| (255 - hex.to_i(16)).to_s(16).rjust(2, '0') }
+    self.color = background_color.gsub(/\h{2}/) do |hex|
+      (255 - hex.to_i(16)).to_s(16).rjust(2, '0')
     end
   end
 end

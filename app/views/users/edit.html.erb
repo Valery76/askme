@@ -55,16 +55,12 @@
       <div class="form-field">
         <%= f.label :background_color, class: 'form-label' %>
         <%= f.color_field :background_color,
-          value: @user.background_color || '#005a55' %>
+          value: @user.background_color %>
       </div>
 
       <div class="form-action buffer-top">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>
     <% end %>
-  </div>
-
-  <div class="column-1-2 user-preview">
-    <%= render partial: 'user' %>
   </div>
 </div>
