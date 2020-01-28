@@ -125,7 +125,7 @@ class User < ApplicationRecord
   private
 
   def username_to_downcase
-    self.username = username.downcase
+    self.username = username.downcase unless username.nil?
   end
 
   def set_color
