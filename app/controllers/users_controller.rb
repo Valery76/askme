@@ -94,6 +94,21 @@ class UsersController < ApplicationController
     @new_question = @user.questions.build
   end
 
+  def destroy
+    if current_user.present?
+      if current_user == @user
+        session[:user_id] = nil
+        @user.questions.destroy_all
+        @user.destroy
+        redirect_to root_path, notice: 'Ваш аккаунт удалён, но мы будем очень скучать'
+      else
+        redirect_to root_path, alert: 'Вы можете удалить только свой аккаунт!'
+      end
+    else
+      render 'sessions/new', notice: 'Чтобы удалить аккаунт пожалуйста сначала залогиньтесь'
+    end
+  end
+
   private
 
   # Если загруженный из базы юзер и текущий залогиненный не совпадают — посылаем
