@@ -98,7 +98,6 @@ class UsersController < ApplicationController
     if current_user.present?
       if current_user == @user
         session[:user_id] = nil
-        @user.questions.destroy_all
         @user.destroy
         redirect_to root_path, notice: 'Ваш аккаунт удалён, но мы будем очень скучать'
       else

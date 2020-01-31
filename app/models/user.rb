@@ -25,7 +25,7 @@ class User < ApplicationRecord
   # Когда мы вызываем метод questions у экземпляра класса User, рельсы
   # поймут это как просьбу найти в базе все объекты класса Questions со
   # значением user_id равный user.id.
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   # Валидация, которая проверяет, что поля email и username не пустые и не равны
   # nil. Если не задан email и username, объект не будет сохранен в базу.
