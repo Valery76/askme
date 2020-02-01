@@ -95,17 +95,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if current_user.present?
-      if current_user == @user
-        session[:user_id] = nil
-        @user.destroy
-        redirect_to root_path, notice: 'Ваш аккаунт удалён, но мы будем очень скучать'
-      else
-        redirect_to root_path, alert: 'Вы можете удалить только свой аккаунт!'
-      end
-    else
-      render 'sessions/new', notice: 'Чтобы удалить аккаунт пожалуйста сначала залогиньтесь'
-    end
+    session[:user_id] = nil
+    @user.destroy
+    redirect_to root_path, notice: 'Ваш аккаунт удалён, но мы будем очень скучать'
   end
 
   private
