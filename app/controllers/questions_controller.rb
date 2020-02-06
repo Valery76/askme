@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   def update
-    if @question.update(question_params)
+    if @question.update(question_params.except(:user_id))
       redirect_to user_path(@question.user), notice: 'Вопрос сохранён'
     else
       render :edit
