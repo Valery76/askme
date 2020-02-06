@@ -16,9 +16,17 @@
       </div>
     <% end %>
 
-    <%# Дата создания вопроса (отформатированная) %>
-    <div class="question-date">
-      <%= l(question.created_at, format: :short) %>
+    <div class="flex-wrapper">
+      <%# Дата создания вопроса (отформатированная) %>
+      <div class="question-date">
+        <%= l(question.created_at, format: :short) %>
+      </div>
+      <% if question.author %>
+        <div class="question-author">
+          вопрос от
+          <%= link_to "@#{question.author.username}", user_path(question.author) %>
+        </div>
+      <% end %>
     </div>
   </div>
 

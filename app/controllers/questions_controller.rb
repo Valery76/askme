@@ -11,8 +11,9 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    @question = Question.new(question_params)
-
+    q_params = question_params
+    q_params[:author] = current_user
+    @question = Question.new(q_params)
     if @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос задан'
     else
@@ -56,7 +57,7 @@ class QuestionsController < ApplicationController
     # Защита от уязвимости: если текущий пользователь — адресат вопроса,
     # он может менять ответы на вопрос, ему доступно также поле :answer.
     if current_user.present? &&
-       params[:question][:user_id].to_i == current_user.id
+      params.dig(:question, :user_id)&.to_i == current_user.id
       params.require(:question).permit(:user_id, :text, :answer)
     else
       params.require(:question).permit(:user_id, :text)

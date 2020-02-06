@@ -27,6 +27,9 @@ class User < ApplicationRecord
   # значением user_id равный user.id.
   has_many :questions, dependent: :destroy
 
+  has_many :asked_questions, class_name: 'Question', foreign_key: 'author_id',
+    dependent: :nullify
+
   # Валидация, которая проверяет, что поля email и username не пустые и не равны
   # nil. Если не задан email и username, объект не будет сохранен в базу.
   validates :email, :username, presence: true

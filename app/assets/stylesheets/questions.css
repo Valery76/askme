@@ -26,7 +26,12 @@
 .question-answer {
 }
 
+.question-author {
+  color: #a0a0a0;
+}
+
 .question-date {
+  flex-grow: 1;
   color: #a0a0a0;
   font-size: 12px;
 }
