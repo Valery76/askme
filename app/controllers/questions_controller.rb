@@ -11,9 +11,9 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    q_params = question_params
-    q_params[:author] = current_user
-    @question = Question.new(q_params)
+    @question = Question.new(question_params)
+    @question.author = current_user
+
     if @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос задан'
     else
