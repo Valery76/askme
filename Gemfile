@@ -9,6 +9,8 @@ gem 'rails-i18n'
 
 gem 'jquery-rails'
 
+gem 'nokogiri', '>= 1.10.8'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
