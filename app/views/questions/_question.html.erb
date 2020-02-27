@@ -6,13 +6,13 @@
   <div class="question-content">
     <%# Текст вопроса %>
     <div class="question-text text-lead">
-      <%= question.text %>
+      <%= change_hashtags_to_links(question.text) %>
     </div>
 
     <%# Текст ответа, если он есть %>
     <% if question.answer.present? %>
       <div class="question-answer text-lead">
-        <%= question.answer %>
+        <%= change_hashtags_to_links(question.answer) %>
       </div>
     <% end %>
 
@@ -20,6 +20,11 @@
       <%# Дата создания вопроса (отформатированная) %>
       <div class="question-date">
         <%= l(question.created_at, format: :short) %>
+      </div>
+      <div class="question-hashtags">
+        <% question.hashtags.each do |h| %>
+          <%= change_hashtags_to_links(h.name) %>
+        <% end %>
       </div>
       <% if question.author %>
         <div class="question-author">

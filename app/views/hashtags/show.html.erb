@@ -1,0 +1,13 @@
+<div class="content-wrapper buffer-top">
+  <div class="buffer-both text-center">
+    <h1>Вопросы с хештегом <%= @hashtag.name %></h1>
+  </div>
+
+  <div class="">
+    <div class="user-questions buffer-both">
+      <div class="questions-list">
+        <%= render partial: 'questions/question', collection: @questions %>
+      </div>
+    </div>
+  </div>
+</div>

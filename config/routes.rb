@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'users#index'
 
   resources :users
   resources :questions, except: [:show, :new, :index]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :hashtags, only: [:show]
 
   get 'sign_up' => 'users#new'
   get 'log_in' => 'sessions#new'

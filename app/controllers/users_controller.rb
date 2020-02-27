@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @hashtags = Hashtag.all
   end
 
   # Действие new будет отзываться по адресу /users/new

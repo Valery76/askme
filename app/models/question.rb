@@ -1,29 +1,20 @@
-# (c) goodprogrammer.ru
-
-# Модель вопроса.
-#
-# Каждый экземпляр этого класса — загруженная из БД информация о конкретном
-# вопросе.
-
 class Question < ApplicationRecord
-  # Эта команда добавляет связь с моделью User на уровне объектов она же
-  # добавляет метод .user к данному объекту.
-  #
-  # Вспоминайте уроки про рельционные БД и связи между таблицами.
-  #
-  # Когда мы вызываем метод user у экземпляра класса Question, рельсы
-  # поймут это как просьбу найти в базе объект класса User со значением id
-  # равный question.user_id.
   belongs_to :user
-
   belongs_to :author, class_name: 'User', optional: true
+  has_many :hashtag_questions, dependent: :destroy
+  has_many :hashtags, through: :hashtag_questions
 
-  # Эта валидация препятствует созданию вопросов, у которых нет пользователя
-  # если задан пустой текст вопроса (поле text пустое), объект не будет сохранен
-  # в базу.
   validates :user, :text, presence: true
-
-  # Задача 48-1. Задание4.
-  # Проверка максимальной длины текста вопроса (максимум 255 символов)
   validates :text, length: { maximum: 255 }
+
+  after_commit :update_hashtags, on: [:create, :update]
+
+  private
+
+  def update_hashtags
+    self.hashtags =
+      "#{text} #{answer}".downcase.scan(Hashtag::REGEX).uniq.map do |tag|
+        Hashtag.find_or_create_by(name: tag)
+    end
+  end
 end
